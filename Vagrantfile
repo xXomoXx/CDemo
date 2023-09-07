@@ -14,7 +14,6 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = "bento/ubuntu-20.04"
   config.vm.box = "centos/7"
-  config.vm.network "forwarded_port", guest: 80, host: 8888
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
 
@@ -26,6 +25,7 @@ Vagrant.configure("2") do |config|
   (1..Anz).each do | i |
     config.vm.define "target#{i}" do |target|
       target.vm.network "private_network", ip: "192.168.179.#{1+i}"
+      target.vm.network "forwarded_port", guest: 80, host: "880#{i}"
       target.vm.hostname = "VBoxVM#{i}"
       target.vm.provider "virtualbox" do |vb|
          vb.gui = true
