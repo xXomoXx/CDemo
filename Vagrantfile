@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
          vb.check_guest_additions = false
          vb.memory = "2048"
          vb.cpus = 2
-         vb.name = "VBox#{i}"
+         vb.name = "VBx#{i}"
         end
       target.vm.provision "shell", inline: <<-EOF
       if [ ! -f /home/vagrant/.ssh/id_rsa ]; then
