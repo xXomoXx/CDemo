@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
          vb.check_guest_additions = false
          vb.memory = "2048"
          vb.cpus = 2
-         vb.name = "VBoxVM#{i}"
+         vb.name = "VBox#{i}"
         end
 
         # target.vm.provision "shell", privileged: false, path: "install_ansible.sh"
@@ -51,9 +51,9 @@ Vagrant.configure("2") do |config|
         #   export ANSIBLE_HOST_KEY_CHECKING=False
         #   ansible-playbook playbook.yml --inventory-file=hosts
         # EOF
-        target.vm.provision provisioner do |ansible|
-          ansible.playbook = "playbook.yaml"
-        end
+       # target.vm.provision provisioner do |ansible|
+       #   ansible.playbook = "playbook.yaml"
+       # end
 
     end
   end
