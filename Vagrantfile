@@ -35,6 +35,10 @@ Vagrant.configure("2") do |config|
          vb.cpus = 2
          vb.name = "VBox#{i}"
         end
+      target.vm.provision "shell", inline: <<-EOF
+        sudo yum update -y
+      EOF
+
 
         # target.vm.provision "shell", privileged: false, path: "install_ansible.sh"
         # # run ansible
