@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = "bento/ubuntu-20.04"
   config.vm.box = "centos/7"
-  provisioner = Vagrant::Util::Platform.windows? ? :guest_ansible : :ansible
+  # provisioner = Vagrant::Util::Platform.windows? ? :guest_ansible : :ansible
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
 
