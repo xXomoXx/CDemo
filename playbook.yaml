@@ -18,6 +18,7 @@
       debug:
         msg: "Updates wurden erfolgreich durchgeführt."
 
+
  # gather_facts: false
  # tasks:
  #   - name: Install Apache
