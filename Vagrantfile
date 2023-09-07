@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = "bento/ubuntu-20.04"
   config.vm.box = "centos/7"
+  provisioner = Vagrant::Util::Platform.windows? ? :guest_ansible : :ansible
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
 
@@ -35,26 +36,25 @@ Vagrant.configure("2") do |config|
          vb.name = "VBoxVM#{i}"
         end
 
-        target.vm.provision "shell", privileged: false, path: "install_ansible.sh"
-        # run ansible
-        target.vm.provision "shell", privileged: false, inline: <<-EOF
-          if [ ! -f /home/vagrant/.ssh/id_rsa ]; then
-            wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant -O /home/vagrant/.ssh/id_rsa
-            wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/id_rsa.pub
-            chmod 600 /home/vagrant/.ssh/id_*
-          fi
-          rm -rf /tmp/provisioning
-          cp -r /vagrant/provisioning /tmp/provisioning
-          cd /tmp/provisioning
-          chmod -x hosts
-          export ANSIBLE_HOST_KEY_CHECKING=False
-          ansible-playbook playbook.yml --inventory-file=hosts
-        EOF
-     
-        # so geht es nicht unter WIndows
-        # target.vm.provision "ansible" do |a|
-        # a.playbook = "playbook.yaml"
-        # end
+        # target.vm.provision "shell", privileged: false, path: "install_ansible.sh"
+        # # run ansible
+        # target.vm.provision "shell", privileged: false, inline: <<-EOF
+        #   if [ ! -f /home/vagrant/.ssh/id_rsa ]; then
+        #     wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant -O /home/vagrant/.ssh/id_rsa
+        #     wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/id_rsa.pub
+        #     chmod 600 /home/vagrant/.ssh/id_*
+        #   fi
+        #   rm -rf /tmp/provisioning
+        #   cp -r /vagrant/provisioning /tmp/provisioning
+        #   cd /tmp/provisioning
+        #   chmod -x hosts
+        #   export ANSIBLE_HOST_KEY_CHECKING=False
+        #   ansible-playbook playbook.yml --inventory-file=hosts
+        # EOF
+        target.vm.provision provisioner do |ansible|
+          ansible.playbook = "playbook.yaml"
+        end
+
     end
   end
   
