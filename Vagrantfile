@@ -14,12 +14,12 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = "bento/ubuntu-20.04"
   config.vm.box = "centos/7"
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: 8888
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
 
  # if Vagrant.has_plugin?("vagrant-vbguest")
- #   config.vbguest.auto_update = false
+ #    config.vbguest.auto_update = false
  # end 
 
   Anz=2
