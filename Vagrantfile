@@ -13,9 +13,10 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "centos/7"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
-  config.vm.box = "centos/7"
 
  # if Vagrant.has_plugin?("vagrant-vbguest")
  #   config.vbguest.auto_update = false
@@ -25,6 +26,7 @@ Vagrant.configure("2") do |config|
   (1..Anz).each do | i |
     config.vm.define "target#{i}" do |target|
       target.vm.network "private_network", ip: "192.168.179.#{1+i}"
+      target.vm.hostname = "VBoxVM#{i}"
       target.vm.provider "virtualbox" do |vb|
          vb.gui = true
          vb.check_guest_additions = false
@@ -32,6 +34,9 @@ Vagrant.configure("2") do |config|
          vb.cpus = 2
          vb.name = "VBoxVM#{i}"
         end
+      target.vm.provision "ansible_local" do |a|
+        a.playbook = "playbook.yaml"
+      end
     end
   end
   
