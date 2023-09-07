@@ -1,5 +1,5 @@
 ---
-- name: provisioning
+- name: Update
   hosts: all
   become: true # Damit wird Ansible als Root-Benutzer ausgeführt, um yum auszuführen
 
@@ -20,14 +20,14 @@
 
 
  gather_facts: false
- tasks:
-   - name: Install Apache
-     package:
-       name: httpd
-       state: present
-   - name: Start Apache
-     service:
-       name: httpd
-       state: startet
-       enabled: true
+#  tasks:
+#    - name: Install Apache
+#      package:
+#        name: httpd
+#        state: present
+#    - name: Start Apache
+#      service:
+#        name: httpd
+#        state: startet
+#        enabled: true
 
