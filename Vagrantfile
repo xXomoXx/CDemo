@@ -36,6 +36,11 @@ Vagrant.configure("2") do |config|
          vb.name = "VBox#{i}"
         end
       target.vm.provision "shell", inline: <<-EOF
+      if [ ! -f /home/vagrant/.ssh/id_rsa ]; then
+             wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant -O /home/vagrant/.ssh/id_rsa
+             wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/id_rsa.pub
+             chmod 600 /home/vagrant/.ssh/id_*
+      fi
         sudo yum update -y
       EOF
 
