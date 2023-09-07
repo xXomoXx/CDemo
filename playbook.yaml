@@ -3,31 +3,31 @@
   hosts: all
   become: true # Damit wird Ansible als Root-Benutzer ausgeführt, um yum auszuführen
 
-  tasks:
-    - name: Führe yum-Updates durch
-      yum:
-        name: "*"
-        state: latest
-      register: yum_update_result
+  # tasks:
+  #   - name: Führe yum-Updates durch
+  #     yum:
+  #       name: "*"
+  #       state: latest
+  #     register: yum_update_result
 
-    - name: Zeige Ergebnisse der Updates an
-      debug:
-        var: yum_update_result
+  #   - name: Zeige Ergebnisse der Updates an
+  #     debug:
+  #       var: yum_update_result
 
-    - name: Füge eine Kommentarzeile hinzu
-      debug:
-        msg: "Updates wurden erfolgreich durchgeführt."
+  #   - name: Füge eine Kommentarzeile hinzu
+  #     debug:
+  #       msg: "Updates wurden erfolgreich durchgeführt."
 
 
- # gather_facts: false
- # tasks:
- #   - name: Install Apache
- #     package:
- #       name: httpd
- #       state: present
- #   - name: Start Apache
- #     service:
- #       name: httpd
- #       state: startet
- #       enabled: true
+ gather_facts: false
+ tasks:
+   - name: Install Apache
+     package:
+       name: httpd
+       state: present
+   - name: Start Apache
+     service:
+       name: httpd
+       state: startet
+       enabled: true
 
