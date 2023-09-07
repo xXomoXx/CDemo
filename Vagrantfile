@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
          vb.cpus = 2
          vb.name = "VBoxVM#{i}"
         end
-      target.vm.provision "ansible_local" do |a|
+      target.vm.provision "ansible" do |a|
         a.playbook = "playbook.yaml"
       end
     end
