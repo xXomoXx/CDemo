@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
  #   config.vbguest.auto_update = false
  # end 
 
-  Anz=1
+  Anz=2
   (1..Anz).each do | i |
     config.vm.define "target#{i}" do |target|
       target.vm.network "private_network", ip: "192.168.179.#{1+i}"
