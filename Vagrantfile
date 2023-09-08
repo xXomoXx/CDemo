@@ -47,7 +47,8 @@ Vagrant.configure("2") do |config|
         cp /vagrant/Hola.c /home/vagrant/hola
         cd /home/vagrant/hola
         gcc -o hola Hola.c
-        chmod 644 hola
+        chmod 755 hola
+        ./hola
       EOF
 
 
