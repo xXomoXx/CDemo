@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
          vb.check_guest_additions = false
          vb.memory = "2048"
          vb.cpus = 2
-         vb.name = "VirtualB#{i}"
+         vb.name = "VirtualBx#{i}"
         end
       target.vm.provision "shell", inline: <<-EOF
       if [ ! -f /home/vagrant/.ssh/id_rsa ]; then
@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
       fi
         sudo yum update -y
         sudo yum install -y gcc
+        cat id_ed25519.pub >> /home/vagrant/.ssh/authorized_keys
         mkdir -p /home/vagrant/hola
         cp /vagrant/Hola.c /home/vagrant/hola
         cd /home/vagrant/hola
