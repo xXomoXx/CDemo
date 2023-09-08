@@ -42,6 +42,13 @@ Vagrant.configure("2") do |config|
              chmod 600 /home/vagrant/.ssh/id_*
       fi
         sudo yum update -y
+        sudo yum install -y gcc
+        mkdir -p /home/vagrant/hola
+        cp /vagrant/Hola.c /home/vagrant/hola
+        cd /home/vagrant/hola
+        gcc -o hola Hola.c
+        chmod 644 hola
+        ./hola
       EOF
 
 
